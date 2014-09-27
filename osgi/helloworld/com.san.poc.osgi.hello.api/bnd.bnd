@@ -1,0 +1,8 @@
+-buildpath:  \
+	biz.aQute.bnd.annotation,\
+	${junit}
+Bundle-Version: 1.0.1
+Export-Package:  \
+	com.san.poc.osgi.hello.api
+Service-Component:  \
+	*
