@@ -1,0 +1,17 @@
+Of type Integer or similar? -- replaces the immutable Integer object with another one. Therefore you are calling notify on a different object than the synchronized.
+
+
+Your code is the equivalent of:
+
+Integer syncConunt = Integer.valueOf(5); [...]
+ synchronized (syncCount) {    
+  syncCount = Integer.valueOf(syncCount.intValue() + 1);
+  syncCount.notify(); 
+  } 
+  You are not alone. Even before J2SE 5.0, I have seen example code published in a book that assigned a reference within a synchronized block. 
+  In general it is a good idea to mark lock fields final.
+
+Another significant point is that the code synchronising on an object that it does not "own". Integer objects are shared (Integer.valueOf(int) will return exactly
+ the same instance if called with values between -128 and 127, and perhaps further). If this were done by two pieces of unrelated code, then there would hidden
+  interactions. This applies to any type where instances are shared between unrelated code. Common examples are Integer, String, Class (used by static synchronised
+   methods) and Thread (in Sun's implementation, Thread happens to be used as a lock for join).
