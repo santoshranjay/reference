@@ -7,6 +7,7 @@ import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.MessageProducer;
+import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.NamingException;
@@ -19,15 +20,15 @@ public class AmqMsgComm {
 
 	static{
 		  	cf = new ActiveMQConnectionFactory("tcp://localhost:61616");
-		    RedeliveryPolicy redeliveryPolicy = new RedeliveryPolicy();
-		    redeliveryPolicy.setInitialRedeliveryDelay(10000);
-		    redeliveryPolicy.setBackOffMultiplier(2);
-		    redeliveryPolicy.setUseExponentialBackOff(true);
-		    redeliveryPolicy.setMaximumRedeliveries(-1);
-
-		    cf.setRedeliveryPolicy(redeliveryPolicy);
-		    cf.setUseRetroactiveConsumer(true);
-		    cf.setClientIDPrefix("ID");
+//		    RedeliveryPolicy redeliveryPolicy = new RedeliveryPolicy();
+//		    redeliveryPolicy.setInitialRedeliveryDelay(10000);
+//		    redeliveryPolicy.setBackOffMultiplier(2);
+//		    redeliveryPolicy.setUseExponentialBackOff(true);
+//		    redeliveryPolicy.setMaximumRedeliveries(-1);
+//
+//		    cf.setRedeliveryPolicy(redeliveryPolicy);
+////		    cf.setUseRetroactiveConsumer(true);
+//		    cf.setClientIDPrefix("ID");
 	}
 	
 	Connection getConnection() throws JMSException{
@@ -51,7 +52,7 @@ public class AmqMsgComm {
 		
 		conn.start();
 		final Session sess = conn.createSession(true, Session.SESSION_TRANSACTED);
-		Destination destination = sess.createQueue("testq");
+		Queue destination = sess.createQueue("testq");
 		MessageConsumer consumer = sess.createConsumer(destination);
 		consumer.setMessageListener(new MessageListener() {
 			
@@ -95,10 +96,10 @@ public class AmqMsgComm {
 	public static void main(String[] args) throws NamingException, JMSException, InterruptedException {
 		AmqMsgComm msgcomm = new AmqMsgComm();
 //		System.out.println("Msg Recvd " + msgcomm.recieveMsg());
-		msgcomm.sendMsg("Msg 1: Test msg");
+//		msgcomm.sendMsg("Msg 1: Test msg");
 //		System.out.println("Msg Recvd " + msgcomm.recieveMsg());
-		msgcomm.sendMsg("Msg 2: Test msg");
-		msgcomm.sendMsg("Msg 3: Test msg");
+//		msgcomm.sendMsg("Msg 2: Test msg");
+//		msgcomm.sendMsg("Msg 3: Test msg");
 //		System.out.println("Msg Recvd " + msgcomm.recieveMsg());
 //		System.out.println("Msg Recvd " + msgcomm.recieveMsg());
 		msgcomm.recieveMsg(new MessageHandler() {

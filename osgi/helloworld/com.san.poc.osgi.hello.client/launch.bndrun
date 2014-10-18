@@ -5,8 +5,10 @@
 -resolve.effective: active
 
 -runbundles:  \
+	biz.aQute.bnd.annotation;version='[2.3.0,2.3.1)',\
 	com.san.poc.osgi.hello.api;version=latest,\
 	com.san.poc.osgi.hello.client;version=latest,\
+	com.san.poc.osgi.hello.configimpl;version=latest,\
 	com.san.poc.osgi.hello.impl;version=latest,\
 	org.apache.felix.configadmin;version='[1.8.0,1.8.1)',\
 	org.apache.felix.gogo.command;version='[0.12.0,0.12.1)',\
@@ -20,4 +22,5 @@
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
 	osgi.identity;filter:='(osgi.identity=com.san.poc.osgi.hello.api)',\
 	osgi.identity;filter:='(osgi.identity=com.san.poc.osgi.hello.client)',\
+	osgi.identity;filter:='(osgi.identity=com.san.poc.osgi.hello.configimpl)',\
 	osgi.identity;filter:='(osgi.identity=com.san.poc.osgi.hello.impl)'

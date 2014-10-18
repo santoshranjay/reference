@@ -4,7 +4,7 @@ import aQute.bnd.annotation.component.Component;
 
 import com.san.poc.osgi.hello.api.Hello;
 
-@Component
+@Component(immediate=true)
 public class HelloImpl implements Hello {
 
 	@Override
