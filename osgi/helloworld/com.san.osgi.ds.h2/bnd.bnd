@@ -1,0 +1,12 @@
+-buildpath:  \
+	osgi.core,\
+	osgi.cmpn,\
+	biz.aQute.bnd.annotation,\
+	${junit},\
+	osgi.enterprise,\
+	lib/h2-1.3.174.jar;version=file
+Bundle-Version: 0.0.0.${tstamp}
+Private-Package:  \
+	com.san.osgi.ds.h2
+Service-Component:  \
+	*

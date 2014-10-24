@@ -1,0 +1,7 @@
+-buildpath:  \
+	biz.aQute.bnd.annotation,\
+	${junit},\
+	osgi.enterprise
+Bundle-Version: 1.0.0
+Export-Package:  \
+	com.san.osgi.ds.api

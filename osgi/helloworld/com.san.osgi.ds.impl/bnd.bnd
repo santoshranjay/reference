@@ -1,0 +1,12 @@
+-buildpath:  \
+	osgi.core,\
+	osgi.cmpn,\
+	biz.aQute.bnd.annotation,\
+	${junit},\
+	com.san.osgi.ds.api;version=latest,\
+	osgi.enterprise
+Bundle-Version: 1.0.0
+Private-Package:  \
+	com.san.osgi.ds.impl
+Service-Component:  \
+	*
