@@ -1,0 +1,64 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+		<!-- indicate to first look for a server -->
+		<property name="locateExistingServerIfPossible" value="true" />
+		<!-- search for the MBeanServer instance with the given agentId -->
+		<!-- <property name="agentId" value="<MBeanServer instance agentId>"/> -->
+	</bean>
+
+
+
+	<!-- this bean must not be lazily initialized if the exporting is to happen -->
+	<bean id="exporter" class="org.springframework.jmx.export.MBeanExporter"
+		lazy-init="false">
+		<!-- <property name="server" ref="mbeanServer"/> -->
+
+		<property name="beans">
+			<map>
+				<entry key="bean:name=testBean" value-ref="testBean"/>
+			</map>
+		</property>
+		<property name="notificationListenerMappings">
+			<map>
+				<entry key="bean:name=testBean">
+					<bean class="com.san.jmx.service.EmailNotificationListener">
+						<constructor-arg>
+							<bean class="com.san.jmx.service.MailingService">
+								<property name="mailSender" ref="mailSender" />
+								<property name="templateMessage" ref="templateMessage" />
+							</bean>
+						</constructor-arg>
+					</bean>
+				</entry>
+			</map>
+		</property>
+
+	</bean>
+
+	 <bean id="testBean" class="com.san.jmx.mbean.JmxTestBean"> <property 
+		name="name" value="TEST" /> <property name="age" value="100" /> </bean> 
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="sanjeevronjon@gmail.com" />
+		<property name="password" value="sanj1503" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- this is a template message that we can pre-load with default state -->
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="notificationservice" />
+		<property name="subject" value="jmx notification" />
+	</bean>
+
+</beans>

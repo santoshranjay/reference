@@ -1,0 +1,44 @@
+#override clone judiciously
+The Cloneable interface was intended as a mixin interface (mixin is a type that a class
+can implement in addition to its primary type to declare that it provide some optional 
+behaivor) for objects to advertise that they permit cloning. 
+
+Unfortunately, it fails to serve this purpose. Its
+primary flaw is that it lacks a clone method, and Object’s clone method is protected.
+You cannot, without resorting to reflection (Item 53), invoke the clone
+method on an object merely because it implements Cloneable. Even a reflective
+invocation may fail, as there is no guarantee that the object has an accessible
+clone method. 
+
+The general contract for the clone method is weak. Here it is, copied from the
+specification for java.lang.Object [JavaSE6]:
+Creates and returns a copy of this object. The precise meaning of “copy” may
+depend on the class of the object. The general intent is that, for any object x,
+the expression
+x.clone() != x
+will be true, and the expression
+x.clone().getClass() == x.getClass()
+will be true, but these are not absolute requirements. While it is typically the
+case that
+x.clone().equals(x)
+will be true, this is not an absolute requirement. Copying an object will typically
+entail creating a new instance of its class, but it may require copying of
+internal data structures as well. No constructors are called.
+
+how to implement a well-behaved clone method.
+=>
+If every field contains a primitive value or a reference to an immutable object, 
+the returned object (super.clone) may be exactly what you need, in which case no further 
+processing is necessary.  In this case, all you need do in addition to declaring that you 
+implement Cloneable is to provide public access to Object’s protected clone method.
+ex- PhoneNumber
+=>If an object contains fields that refer to mutable objects.
+1. The easiest way to do this is to call clone recursively on the objects(e.g., array), provided
+it to be non-final.(the clone architecture is incompatible with
+normal use of final fields referring to mutable object)
+ex - stack
+2. 
+
+
+
+when it is appropriate to do so, and presents alternatives.
