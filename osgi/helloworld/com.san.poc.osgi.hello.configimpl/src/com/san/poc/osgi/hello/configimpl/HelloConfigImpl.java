@@ -4,18 +4,19 @@ import java.util.Map;
 
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
+import aQute.bnd.annotation.component.ConfigurationPolicy;
 import aQute.bnd.annotation.metatype.Configurable;
 
 import com.san.poc.osgi.hello.api.Hello;
 
-@Component(immediate=true,designate=Config.class)
+@Component(designate=HelloConfigImplConfig.class, configurationPolicy=ConfigurationPolicy.optional)
 public class HelloConfigImpl implements Hello{
-	Config config;
+	HelloConfigImplConfig config;
 
 	@Activate
-	public void activate(Map<String, String> properties){
+	public void activate(Map<String, Object> properties){
 		System.out.println("Activating...");
-		config = Configurable.createConfigurable(Config.class, properties);
+		config = Configurable.createConfigurable(HelloConfigImplConfig.class, properties);
 		System.out.println("Activated config " + config.helloMsg());
 	}
 	
@@ -25,3 +26,4 @@ public class HelloConfigImpl implements Hello{
 	}
 
 }
+
