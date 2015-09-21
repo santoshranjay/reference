@@ -1,0 +1,22 @@
+apply plugin: 'scala'
+
+repositories{
+        maven {url "//replace with your maven repository url here
+"}
+}
+
+dependencies{
+        compile 'org.scala-lang:scala-library:2.10.4'
+}
+
+task wrapper(type: Wrapper){
+        gradleVersion=2.7
+}
+
+
+task run(type: JavaExec, dependsOn: classes) {
+        main = 'Hello'
+        classpath sourceSets.main.output.classesDir
+        classpath configurations.runtime
+}
+
