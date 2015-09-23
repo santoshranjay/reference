@@ -4,7 +4,7 @@ object rationals {
 
 new Rational(1,2)                                 //> res0: hello.Rational = 1/2
 
-val x = new Rational(1,3)                         //> x  : hello.Rational = 1/3
+def x = new Rational(1,3)                         //> x: => hello.Rational
 val y = new Rational(5,7)                         //> y  : hello.Rational = 5/7
 val z = new Rational(3,2)                         //> z  : hello.Rational = 3/2
 
