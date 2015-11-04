@@ -3,7 +3,7 @@ package hello
 object Book {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
 
-	// scala treats STring as higher level sequences of characters that can be queried with predicates.
+	// scala treats String as higher level sequences of characters that can be queried with predicates.
 	//the predicate _.isUpper is an example of function literal in scala
    "fadsfYfsad".exists(_.isUpper)                 //> res0: Boolean = true
    
