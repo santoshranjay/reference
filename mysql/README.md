@@ -1,8 +1,8 @@
-#install
-install Microsoft Visual C++ 2013 Redistributable Package
-> https://www.microsoft.com/en-in/download/details.aspx?id=40784
+### install
+install Microsoft Visual C++ 2013 Redistributable Package. 
+https://www.microsoft.com/en-in/download/details.aspx?id=40784
 
-#start server
+### start server
   1. create a data folder under MYSQL_HOME
   2. initialize
     ```$ mysqld --initialize //this create generated password printed in .err file inside data folder```
@@ -12,7 +12,7 @@ install Microsoft Visual C++ 2013 Redistributable Package
   4. connect client and change root password
    ``` 
     $mysql -u root -p
-    $ALTER USER USER() IDENTIFIED BY 'password' 
+    $ALTER USER USER() IDENTIFIED BY 'password'. 
     ```
 
 
